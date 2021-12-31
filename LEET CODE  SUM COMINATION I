@@ -1,0 +1,30 @@
+class Solution {
+    private :
+   void util_func( int ind , vector<int> &arr, int target ,  vector<vector<int>> &ans ,vector<int> &ds)
+{
+    if(ind == arr.size()){
+      if(target == 0){
+         ans.push_back(ds);
+      }
+      return ;
+    }
+
+    // pick up the element
+    if(arr[ind]<=target){
+        ds.push_back(arr[ind]);
+        util_func( ind , arr, target-arr[ind] , ans , ds);
+        ds.pop_back();
+    }
+     // not pick up element
+     util_func( ind+1 , arr , target , ans , ds );
+}
+    public:
+ vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
+ { 
+     vector<vector<int>> ans; // store combination
+     vector<int> ds; // utility data structure
+     util_func(0,candidates,target,ans,ds); // 
+     return ans;
+ }   
+
+};
